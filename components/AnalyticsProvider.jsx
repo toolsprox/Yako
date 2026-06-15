@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { createBrowserSupabaseClient } from '@/lib/supabase-browser';
 
@@ -43,21 +43,19 @@ function getDeviceType() {
   return "Desktop";
 }
 
-export default function AnalyticsProvider({ children }) {
+function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const supabase = createBrowserSupabaseClient();
   const hasTrackedInitialLoad = useRef(false);
 
   useEffect(() => {
-    // 1. Get or Create Visitor ID
     let visitorId = localStorage.getItem('yako_visitor_id');
     if (!visitorId) {
       visitorId = uuidv4();
       localStorage.setItem('yako_visitor_id', visitorId);
     }
 
-    // 2. Get or Create Session ID
     let sessionId = sessionStorage.getItem('yako_session_id');
     if (!sessionId) {
       sessionId = uuidv4();
@@ -66,7 +64,6 @@ export default function AnalyticsProvider({ children }) {
 
     const source = searchParams.get('utm_source') || (document.referrer ? new URL(document.referrer).hostname : 'Direct');
     
-    // Function to ping RPC
     const trackEvent = async (eventType) => {
       let mappedEventType = 'page_view';
       if (pathname.includes('menu')) mappedEventType = 'menu_view';
@@ -86,10 +83,8 @@ export default function AnalyticsProvider({ children }) {
       });
     };
 
-    // Track page view on route change
     trackEvent();
 
-    // Heartbeat to update session duration every 10 seconds
     const interval = setInterval(() => {
       trackEvent('heartbeat');
     }, 10000);
@@ -97,7 +92,6 @@ export default function AnalyticsProvider({ children }) {
     return () => clearInterval(interval);
   }, [pathname, searchParams]);
 
-  // Expose track manual to window for global access
   useEffect(() => {
     window.trackYakoEvent = async (eventType, eventData = {}) => {
       const visitorId = localStorage.getItem('yako_visitor_id');
@@ -117,5 +111,16 @@ export default function AnalyticsProvider({ children }) {
     };
   }, []);
 
-  return <>{children}</>;
+  return null;
+}
+
+export default function AnalyticsProvider({ children }) {
+  return (
+    <>
+      <Suspense fallback={null}>
+        <AnalyticsTracker />
+      </Suspense>
+      {children}
+    </>
+  );
 }
