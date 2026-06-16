@@ -302,6 +302,8 @@ body {
   .glass {
     border-radius: 24px; /* Restore rounded edges on mobile */
     padding: 30px 20px !important; 
+    border-left: none; /* Remove side margin lines */
+    border-right: none;
     /* Flatter shadow on mobile */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
