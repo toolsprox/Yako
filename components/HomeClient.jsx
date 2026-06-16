@@ -24,9 +24,9 @@ export default function HomeClient({ menuItems }) {
       
       {/* Background Aurora / Gradient Orbs for Glassmorphism to blur */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -2, pointerEvents: 'none', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(204, 0, 0, 0.15) 0%, transparent 70%)', filter: 'blur(60px)', opacity: 0.8 }}></div>
-        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)', filter: 'blur(80px)', opacity: 0.8 }}></div>
-        <div style={{ position: 'absolute', top: '40%', left: '30%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%)', filter: 'blur(40px)', opacity: 0.5 }}></div>
+        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(204, 0, 0, 0.15) 0%, transparent 70%)', filter: 'blur(60px)', opacity: 0.8, animation: 'float1 20s infinite ease-in-out' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)', filter: 'blur(80px)', opacity: 0.8, animation: 'float2 25s infinite ease-in-out' }}></div>
+        <div style={{ position: 'absolute', top: '40%', left: '30%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%)', filter: 'blur(40px)', opacity: 0.5, animation: 'float1 30s infinite ease-in-out reverse' }}></div>
       </div>
 
       {/* Subtle Noise Texture overlay to make it feel premium */}
@@ -55,7 +55,7 @@ export default function HomeClient({ menuItems }) {
           >
             <motion.div variants={fadeUp}>
               <h1 className="font-script heading-xl mb-6" style={{ color: '#FFFFFF', textTransform: 'uppercase', textShadow: '0 4px 30px rgba(0,0,0,0.8)' }}>
-                GLORIOUS <br/> SRI LANKAN FOOD
+                GLORIOUS <br/> <span className="text-gradient-primary">SRI LANKAN FOOD</span>
               </h1>
               <p className="mb-10" style={{ fontSize: '1.25rem', color: '#D1D5DB', margin: '0 auto 3rem', lineHeight: 1.7, fontWeight: 300, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
                 A true melting pot of cultures. Experience authentic flavours born from Dutch, Portuguese, Malay, and South Indian influences. Discover the true taste of home cooking.

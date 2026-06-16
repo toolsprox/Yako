@@ -106,26 +106,30 @@ export default function MenuShowcase({ initialMenu = [] }) {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05, duration: 0.3 }}
-                className="hover-scale" 
+                className="bento-card" 
                 style={{ 
-                  padding: '24px', 
+                  padding: '30px', 
                   display: 'flex', 
                   flexDirection: 'column', 
-                  gap: '12px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.05)',
-                  borderRadius: '16px'
+                  gap: '16px',
+                  cursor: 'pointer'
+                }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 1, gap: '1rem' }}>
-                  <h3 className="font-script" style={{ fontSize: '1.8rem', color: 'var(--foreground)' }}>{item.name}</h3>
-                  <span style={{ fontWeight: 600, color: 'var(--primary)', fontSize: '1.25rem', whiteSpace: 'nowrap', fontFamily: 'var(--font-sans)' }}>{item.price}</span>
+                <div className="bento-content">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '8px' }}>
+                    <h3 className="font-script" style={{ fontSize: '2rem', color: 'var(--foreground)', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>{item.name}</h3>
+                    <span style={{ fontWeight: 800, color: '#fff', fontSize: '1.4rem', whiteSpace: 'nowrap', fontFamily: 'var(--font-sans)', background: 'var(--primary)', padding: '4px 12px', borderRadius: '8px', boxShadow: '0 4px 15px rgba(204, 0, 0, 0.4)' }}>{item.price}</span>
+                  </div>
+                  <div style={{ height: '1px', width: '100%', background: 'linear-gradient(90deg, rgba(204,0,0,0.5) 0%, transparent 100%)', marginBottom: '8px' }}></div>
+                  <p style={{ color: '#D1D5DB', fontSize: '1.05rem', lineHeight: 1.6, fontWeight: 300, fontFamily: 'var(--font-sans)' }}>{item.description}</p>
                 </div>
-                <div style={{ height: '1px', width: '100%', background: 'rgba(255,255,255,0.05)', zIndex: 1 }}></div>
-                <p style={{ color: '#A1A1AA', fontSize: '1rem', lineHeight: 1.6, zIndex: 1, fontWeight: 300, fontFamily: 'var(--font-sans)' }}>{item.description}</p>
               </motion.div>
             ))}
           </motion.div>
