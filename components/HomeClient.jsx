@@ -86,7 +86,7 @@ export default function HomeClient({ menuItems }) {
       </section>
 
       {/* Booking Section */}
-      <section id="reservations" className="section container">
+      <section id="reservations" className="section container hide-on-mobile">
         <motion.div 
           initial="hidden"
           whileInView="visible"

@@ -318,6 +318,10 @@ body {
     max-width: 100% !important;
   }
 
+  .hide-on-mobile {
+    display: none !important;
+  }
+
   /* Make sure buttons stretch nicely on mobile if needed, or just stay large tap targets */
   .btn-primary, .btn-outline {
     padding: 14px 24px;

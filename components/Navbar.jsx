@@ -26,7 +26,7 @@ export default function Navbar() {
     { name: 'Home', path: '/', icon: Home },
     { name: 'Menu', path: '/#menu', icon: UtensilsCrossed },
     { name: 'Gallery', path: '/gallery', icon: ImageIcon },
-    { name: 'Book', path: '/#reservations', icon: CalendarHeart }
+    { name: 'Book', path: '/book', icon: CalendarHeart } // Dedicated booking page for mobile
   ];
 
   return (
