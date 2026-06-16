@@ -184,7 +184,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
                 key={`mobile-${category}`} 
                 id={`mobile-${category}`} 
                 style={{ 
-                  flex: '0 0 85%', // Take up 85% width so the next card peeks
+                  flex: '0 0 100%', // Take up 100% width so only ONE category is visible at a time
                   scrollSnapAlign: 'start',
                   display: 'flex',
                   flexDirection: 'column',
@@ -197,8 +197,6 @@ export default function MenuShowcase({ initialMenu = [] }) {
                 </div>
               </div>
             ))}
-            {/* Empty element at the end to allow the last item to be centered/peek properly if needed, but flex 85% at start is usually fine */}
-            <div style={{ flex: '0 0 15px' }}></div> 
           </div>
           
           <div style={{ textAlign: 'center', marginTop: '1rem', color: '#A1A1AA', fontSize: '0.85rem', fontWeight: 500 }}>
