@@ -146,7 +146,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
           MOBILE: SWIPE SNAP CAROUSEL
           ========================================= */}
       {isMobile && (
-        <div style={{ position: 'relative', width: '100vw', marginLeft: '-20px' }}> {/* Counteract container padding */}
+        <div style={{ position: 'relative', width: '100%' }}> 
           
           {/* Paging Dots Indicator */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '2rem' }}>
@@ -175,8 +175,8 @@ export default function MenuShowcase({ initialMenu = [] }) {
               scrollSnapType: 'x mandatory',
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
-              gap: '20px',
-              padding: '0 20px', // Peek effect for next cards
+              gap: '16px',
+              paddingBottom: '20px' // Space for shadow
             }}
           >
             {categories.map((category) => (
@@ -184,8 +184,8 @@ export default function MenuShowcase({ initialMenu = [] }) {
                 key={`mobile-${category}`} 
                 id={`mobile-${category}`} 
                 style={{ 
-                  minWidth: 'calc(100vw - 40px)', // Full width minus padding
-                  scrollSnapAlign: 'center',
+                  flex: '0 0 85%', // Take up 85% width so the next card peeks
+                  scrollSnapAlign: 'start',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1.5rem'
@@ -197,10 +197,12 @@ export default function MenuShowcase({ initialMenu = [] }) {
                 </div>
               </div>
             ))}
+            {/* Empty element at the end to allow the last item to be centered/peek properly if needed, but flex 85% at start is usually fine */}
+            <div style={{ flex: '0 0 15px' }}></div> 
           </div>
           
-          <div style={{ textAlign: 'center', marginTop: '1.5rem', color: '#666', fontSize: '0.85rem' }}>
-            ← Swipe to see more →
+          <div style={{ textAlign: 'center', marginTop: '1rem', color: '#A1A1AA', fontSize: '0.85rem', fontWeight: 500 }}>
+            ← Swipe to see more categories →
           </div>
         </div>
       )}
