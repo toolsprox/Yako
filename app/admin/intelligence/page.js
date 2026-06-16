@@ -20,13 +20,18 @@ export default async function AdminIntelligencePage() {
     .order('start_time', { ascending: false })
     .limit(100);
 
-  // Note: For a true analytics dashboard, we would do aggregate grouping in SQL, 
-  // but for this MVP we pull recent records and reduce them in the client.
+  // Fetch Recent Events for Timeline
+  const { data: events } = await supabase
+    .from('intelligence_events')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(500);
 
   return (
     <AdminIntelligenceClient 
       initialVisitors={visitors || []} 
       initialSessions={sessions || []} 
+      initialEvents={events || []}
     />
   );
 }
