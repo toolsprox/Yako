@@ -175,6 +175,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
               scrollSnapType: 'x mandatory',
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-y', // CRITICAL: Allows vertical scrolling when touching the container
               gap: '16px',
               paddingBottom: '20px' // Space for shadow
             }}
@@ -192,7 +193,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
                 }}
               >
                 <h2 className="font-script heading-lg" style={{ textAlign: 'center', textTransform: 'uppercase', color: '#fff', textShadow: '0 0 20px rgba(204,0,0,0.4)', margin: 0 }}>{category}</h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                   {groupedMenu[category].map((item, index) => <BentoCard key={item.id} item={item} index={index} />)}
                 </div>
               </div>
