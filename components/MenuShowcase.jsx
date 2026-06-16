@@ -172,7 +172,8 @@ export default function MenuShowcase({ initialMenu = [] }) {
             style={{ 
               display: 'flex', 
               overflowX: 'auto', 
-              scrollSnapType: 'x mandatory',
+              overflowY: 'hidden', // CRITICAL: Tells iOS NOT to trap vertical scrolling here
+              scrollSnapType: 'x proximity', // Changed from mandatory to proximity to reduce iOS scroll lock aggressiveness
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
               gap: '16px',
