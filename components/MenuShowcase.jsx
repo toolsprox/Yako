@@ -36,18 +36,22 @@ export default function MenuShowcase({ initialMenu = [] }) {
       
       {/* Category Navigation */}
       <div 
+        className="hide-scrollbar"
         style={{ 
           display: 'flex', 
-          gap: '1rem', 
-          background: 'rgba(255, 255, 255, 0.03)', 
+          gap: '0.5rem', 
+          background: 'rgba(10, 10, 10, 0.6)', 
           padding: '8px', 
-          borderRadius: '50px', 
+          borderRadius: '16px', 
           width: 'max-content',
           maxWidth: '100%',
           overflowX: 'auto',
           margin: '0 auto 4rem',
-          border: '1px solid rgba(255,255,255,0.05)',
-          WebkitOverflowScrolling: 'touch'
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+          WebkitOverflowScrolling: 'touch',
+          msOverflowStyle: 'none',  /* IE and Edge */
+          scrollbarWidth: 'none'  /* Firefox */
         }}
       >
         {categories.map((category) => (
@@ -59,10 +63,11 @@ export default function MenuShowcase({ initialMenu = [] }) {
               background: 'transparent',
               color: activeCategoryName === category ? '#fff' : '#A1A1AA',
               padding: '12px 24px',
-              borderRadius: '50px',
+              borderRadius: '12px',
               border: 'none',
               cursor: 'pointer',
               fontWeight: 600,
+              whiteSpace: 'nowrap',
               fontFamily: 'var(--font-sans)',
               fontSize: '1rem',
               transition: 'color 0.3s ease',
@@ -76,7 +81,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
                   position: 'absolute',
                   inset: 0,
                   background: 'var(--primary)',
-                  borderRadius: '50px',
+                  borderRadius: '12px',
                   zIndex: -1,
                   boxShadow: '0 4px 15px rgba(204, 0, 0, 0.4)'
                 }}

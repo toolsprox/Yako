@@ -197,6 +197,10 @@ body {
   background-clip: text;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .text-gradient-primary {
   background: linear-gradient(135deg, #ff4d4d 0%, var(--primary) 50%, #800000 100%);
   -webkit-background-clip: text;
