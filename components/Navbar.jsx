@@ -3,12 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Home, UtensilsCrossed, Image as ImageIcon, CalendarHeart } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -18,70 +17,48 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
-  // Prevent scrolling when mobile menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
-
   // Don't show public navbar on admin routes
   if (pathname.startsWith('/admin') || pathname.startsWith('/login')) {
     return null;
   }
 
   const links = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Menu', path: '/#menu' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Home', path: '/', icon: Home },
+    { name: 'Menu', path: '/#menu', icon: UtensilsCrossed },
+    { name: 'Gallery', path: '/gallery', icon: ImageIcon },
+    { name: 'Book', path: '/#reservations', icon: CalendarHeart }
   ];
 
   return (
     <>
-      <nav 
-        className="glass-nav" 
-        style={{ 
-          position: 'fixed', 
-          top: '20px', 
-          left: '50%', 
-          transform: 'translateX(-50%)', 
-          zIndex: 60,
-          padding: '12px 30px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: isMobile ? '0' : '2.5rem',
-          width: 'max-content',
-          maxWidth: '90vw',
-          borderRadius: '50px'
-        }}
-      >
-        <Link href="/" style={{ textDecoration: 'none', zIndex: 61 }}>
-          <h2 className="font-script" style={{ color: 'var(--primary)', margin: 0, fontSize: '1.8rem', lineHeight: 1 }}>YAKO</h2>
-        </Link>
+      {/* Desktop Navigation (Unchanged) */}
+      {!isMobile && (
+        <nav 
+          className="glass-nav" 
+          style={{ 
+            position: 'fixed', 
+            top: '20px', 
+            left: '50%', 
+            transform: 'translateX(-50%)', 
+            zIndex: 60,
+            padding: '12px 30px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '2.5rem',
+            width: 'max-content',
+            maxWidth: '90vw',
+            borderRadius: '50px'
+          }}
+        >
+          <Link href="/" style={{ textDecoration: 'none', zIndex: 61 }}>
+            <h2 className="font-script" style={{ color: 'var(--primary)', margin: 0, fontSize: '1.8rem', lineHeight: 1 }}>YAKO</h2>
+          </Link>
 
-        {isMobile ? (
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', zIndex: 61, display: 'flex', alignItems: 'center' }}
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        ) : (
-          <>
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-              {links.map((link) => (
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            {links.map((link) => {
+              if(link.name === 'Book') return null; // We handle Book separately as a button on desktop
+              return (
                 <Link 
                   key={link.name} 
                   href={link.path}
@@ -97,82 +74,105 @@ export default function Navbar() {
                 >
                   {link.name}
                 </Link>
-              ))}
-            </div>
-
+              )
+            })}
             <Link 
-              href="/#reservations"
-              className="btn-primary"
-              style={{ padding: '8px 20px', fontSize: '0.9rem' }}
+              href="/about"
+              style={{
+                textDecoration: 'none',
+                color: pathname === '/about' ? '#fff' : '#A1A1AA',
+                fontWeight: 500,
+                fontSize: '0.95rem',
+                fontFamily: 'var(--font-sans)',
+                transition: 'color 0.2s ease',
+                letterSpacing: '0.5px'
+              }}
             >
-              Book
+              About
             </Link>
-          </>
-        )}
-      </nav>
+          </div>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && isMobile && (
-          <motion.div
-            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            animate={{ opacity: 1, backdropFilter: 'blur(30px)' }}
-            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 55,
-              background: 'rgba(10, 10, 10, 0.85)',
+          <Link 
+            href="/#reservations"
+            className="btn-primary"
+            style={{ padding: '8px 20px', fontSize: '0.9rem' }}
+          >
+            Book
+          </Link>
+        </nav>
+      )}
+
+      {/* App-Style Bottom Navigation for Mobile */}
+      {isMobile && (
+        <>
+          {/* Top minimal brand (No hamburger, just the logo so they know where they are) */}
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, padding: '15px 20px', zIndex: 50, background: 'linear-gradient(to bottom, rgba(10,10,10,0.9), transparent)' }}>
+            <Link href="/" style={{ textDecoration: 'none' }}>
+              <h2 className="font-script" style={{ color: 'var(--primary)', margin: 0, fontSize: '1.8rem', lineHeight: 1 }}>YAKO</h2>
+            </Link>
+          </div>
+
+          {/* Bottom Nav Bar */}
+          <motion.nav 
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            style={{ 
+              position: 'fixed', 
+              bottom: 0, 
+              left: 0, 
+              right: 0, 
+              zIndex: 60,
+              background: 'rgba(15, 15, 15, 0.85)',
+              backdropFilter: 'blur(30px)',
+              WebkitBackdropFilter: 'blur(30px)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
               display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'space-around',
               alignItems: 'center',
-              gap: '2rem'
+              padding: '12px 10px 25px 10px', // Extra bottom padding for iOS home bar
+              boxShadow: '0 -10px 40px rgba(0,0,0,0.5)'
             }}
           >
-            {links.map((link, i) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: i * 0.05 }}
-              >
+            {links.map((link) => {
+              const Icon = link.icon;
+              const isActive = pathname === link.path || (pathname === '/' && link.path === '/#menu' && typeof window !== 'undefined' && window.location.hash === '#menu');
+              
+              return (
                 <Link 
+                  key={link.name} 
                   href={link.path}
                   style={{
                     textDecoration: 'none',
-                    color: pathname === link.path ? 'var(--primary)' : '#fff',
-                    fontWeight: 600,
-                    fontSize: '2rem',
-                    fontFamily: 'var(--font-sans)'
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '4px',
+                    flex: 1,
+                    position: 'relative'
                   }}
                 >
-                  {link.name}
+                  <div style={{ 
+                    color: isActive ? 'var(--primary)' : '#A1A1AA',
+                    transition: 'color 0.2s',
+                    padding: '4px'
+                  }}>
+                    <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+                  </div>
+                  <span style={{ 
+                    fontSize: '0.75rem', 
+                    fontWeight: isActive ? 600 : 400,
+                    color: isActive ? '#fff' : '#A1A1AA',
+                    fontFamily: 'var(--font-sans)',
+                    transition: 'all 0.2s'
+                  }}>
+                    {link.name}
+                  </span>
                 </Link>
-              </motion.div>
-            ))}
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: links.length * 0.05 }}
-              style={{ marginTop: '2rem' }}
-            >
-              <Link 
-                href="/#reservations"
-                className="btn-primary"
-                onClick={() => setIsOpen(false)}
-                style={{ fontSize: '1.2rem', padding: '16px 40px' }}
-              >
-                Book a Table
-              </Link>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              );
+            })}
+          </motion.nav>
+        </>
+      )}
     </>
   );
 }

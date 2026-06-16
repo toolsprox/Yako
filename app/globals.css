@@ -199,11 +199,11 @@ body {
 /* Mobile Phones */
 @media (max-width: 768px) {
   .container {
-    padding: 0 16px;
+    padding: 0; /* Edge to edge on mobile! */
   }
   
   .section {
-    padding: 60px 0;
+    padding: 60px 0 100px 0; /* Extra bottom padding for Bottom Nav */
   }
 
   .heading-xl {
@@ -215,8 +215,12 @@ body {
   }
 
   .glass {
-    border-radius: 16px; /* Slightly tighter corners on small screens */
-    padding: 30px !important; /* Force smaller padding on mobile glass panels */
+    border-radius: 0; /* Edge to edge, no corners */
+    padding: 30px 20px !important; 
+    border-left: none;
+    border-right: none;
+    /* Flatter shadow on mobile */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .glass-nav {
