@@ -77,10 +77,10 @@ export default function MenuShowcase({ initialMenu = [] }) {
 
   const BentoCard = ({ item, index }) => (
     <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: isMobile ? 0 : index * 0.1, ease: "easeOut" }}
+      initial={{ opacity: 0, scale: 0.9, y: 40 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px" }}
+      transition={{ type: "spring", stiffness: 120, damping: 12, delay: index * 0.1 }}
       className="bento-card" 
       style={{ padding: '30px', display: 'flex', flexDirection: 'column', gap: '16px' }}
       onMouseMove={(e) => {
