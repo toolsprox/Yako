@@ -222,7 +222,7 @@ body {
   border-radius: 20px;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 15px rgba(0, 0, 0, 0.8);
 }
 
 .bento-card::before {
@@ -284,7 +284,7 @@ body {
 /* Mobile Phones */
 @media (max-width: 768px) {
   .container {
-    padding: 0; /* Edge to edge on mobile! */
+    padding: 0 15px; /* Give it some breathing room so it's not edge-to-edge */
   }
   
   .section {
@@ -300,10 +300,8 @@ body {
   }
 
   .glass {
-    border-radius: 0; /* Edge to edge, no corners */
+    border-radius: 24px; /* Restore rounded edges on mobile */
     padding: 30px 20px !important; 
-    border-left: none;
-    border-right: none;
     /* Flatter shadow on mobile */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
