@@ -31,21 +31,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Desktop Scroll Observer
-  useEffect(() => {
-    if (isMobile) return;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) setActiveCategory(entry.target.id);
-      });
-    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 });
-
-    categories.forEach(cat => {
-      const el = document.getElementById(`desktop-${cat}`);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [categories, isMobile]);
+  // Desktop Scroll Observer no longer needed since it's tabbed
 
   // Mobile Scroll Observer (for Dots)
   useEffect(() => {
@@ -67,20 +53,12 @@ export default function MenuShowcase({ initialMenu = [] }) {
     return <div style={{ color: '#A1A1AA', textAlign: 'center', padding: '2rem' }}>Loading our glorious menu...</div>;
   }
 
-  const scrollToDesktopCategory = (category) => {
-    const el = document.getElementById(`desktop-${category}`);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
-
   const BentoCard = ({ item, index }) => (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9, y: 40 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "0px" }}
-      transition={{ type: "spring", stiffness: 120, damping: 12, delay: index * 0.1 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 20, delay: index * 0.05 }}
       className="bento-card" 
       style={{ padding: '30px', display: 'flex', flexDirection: 'column', gap: '16px' }}
       onMouseMove={(e) => {
@@ -110,16 +88,16 @@ export default function MenuShowcase({ initialMenu = [] }) {
       {!isMobile && (
         <>
           {/* Floating Jump Menu */}
-          <div style={{ position: 'sticky', top: '20px', zIndex: 40, display: 'flex', justifyContent: 'center', marginBottom: '4rem', pointerEvents: 'none' }}>
-            <div className="hide-scrollbar" style={{ pointerEvents: 'auto', display: 'flex', gap: '0.5rem', background: 'rgba(15, 15, 15, 0.7)', backdropFilter: 'blur(20px)', padding: '8px', borderRadius: '50px', border: '1px solid rgba(255, 255, 255, 0.1)', boxShadow: '0 20px 40px rgba(0,0,0,0.6)' }}>
+          <div style={{ position: 'sticky', top: '20px', zIndex: 40, display: 'flex', justifyContent: 'center', marginBottom: '4rem', pointerEvents: 'none', padding: '0 20px' }}>
+            <div className="hide-scrollbar" style={{ pointerEvents: 'auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', paddingBottom: '10px' }}>
               {categories.map((category) => (
                 <button
                   key={`nav-${category}`}
-                  onClick={() => scrollToDesktopCategory(category)}
-                  style={{ position: 'relative', background: 'transparent', color: activeCategory === category ? '#fff' : '#A1A1AA', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: 600, whiteSpace: 'nowrap', fontFamily: 'var(--font-sans)', fontSize: '0.95rem', transition: 'all 0.3s ease', zIndex: 1 }}
+                  onClick={() => setActiveCategory(category)}
+                  style={{ position: 'relative', background: 'transparent', color: activeCategory === category ? '#fff' : '#888', padding: '12px 24px', border: 'none', cursor: 'pointer', fontWeight: 600, whiteSpace: 'nowrap', fontFamily: 'var(--font-sans)', fontSize: '1rem', transition: 'all 0.3s ease', textTransform: 'uppercase', letterSpacing: '1px', zIndex: 1, textShadow: activeCategory === category ? '0 0 10px rgba(255,50,50,0.8), 0 0 20px rgba(204,0,0,0.5)' : 'none' }}
                 >
                   {activeCategory === category && (
-                    <motion.div layoutId="jumpNavIndicator" style={{ position: 'absolute', inset: 0, background: 'var(--primary)', borderRadius: '50px', zIndex: -1, boxShadow: '0 4px 15px rgba(204, 0, 0, 0.4)' }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+                    <motion.div layoutId="desktopNavButton" style={{ position: 'absolute', inset: 0, background: 'rgba(204, 0, 0, 0.1)', border: '1px solid rgba(255, 50, 50, 0.8)', borderRadius: '50px', zIndex: -1, boxShadow: '0 0 15px rgba(255, 50, 50, 0.5), 0 0 30px rgba(204, 0, 0, 0.3), inset 0 0 15px rgba(204, 0, 0, 0.4)' }} transition={{ type: "spring", stiffness: 400, damping: 30 }} />
                   )}
                   {category}
                 </button>
@@ -127,17 +105,16 @@ export default function MenuShowcase({ initialMenu = [] }) {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6rem' }}>
-            {categories.map((category) => (
-              <div key={`desktop-${category}`} id={`desktop-${category}`} style={{ scrollMarginTop: '100px' }}>
-                <div style={{ marginBottom: '3rem', position: 'relative' }}>
-                  <h2 className="font-script heading-xl" style={{ textTransform: 'uppercase', color: '#fff', textShadow: '0 0 30px rgba(204,0,0,0.4)', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '1rem', display: 'inline-block' }}>{category}</h2>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
-                  {groupedMenu[category].map((item, index) => <BentoCard key={item.id} item={item} index={index} />)}
-                </div>
-              </div>
-            ))}
+          <div
+            key={`desktop-${activeCategory}`}
+            style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
+          >
+            <div style={{ marginBottom: '1rem', position: 'relative' }}>
+              <h2 className="font-script heading-xl" style={{ textTransform: 'uppercase', color: '#fff', textShadow: '0 0 30px rgba(204,0,0,0.4)', display: 'inline-block' }}>{activeCategory}</h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
+              {groupedMenu[activeCategory].map((item, index) => <BentoCard key={item.id} item={item} index={index} />)}
+            </div>
           </div>
         </>
       )}

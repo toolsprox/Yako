@@ -125,6 +125,7 @@ body {
   font-size: 1.1rem;
   border: none;
   cursor: pointer;
+  text-decoration: none !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
@@ -140,17 +141,17 @@ body {
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  color: var(--foreground);
-  padding: 16px 40px;
+  background-color: transparent;
+  color: #fff;
+  padding: 14px 38px;
   border-radius: 50px;
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.1rem;
   border: 1px solid rgba(255,255,255,0.2);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+  transition: all 0.3s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -212,8 +213,6 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  background-size: 200% auto;
-  animation: shimmer 4s linear infinite;
 }
 
 /* Cinematic Bento Box */

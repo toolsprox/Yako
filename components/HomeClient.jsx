@@ -43,17 +43,14 @@ export default function HomeClient({ menuItems }) {
         zIndex: 1
       }}>
         <div className="container">
-          <motion.div 
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
+          <div
             style={{ 
               maxWidth: '800px', 
               margin: '0 auto',
               textAlign: 'center'
             }}
           >
-            <motion.div variants={fadeUp}>
+            <div>
               <h1 className="font-script heading-xl mb-6" style={{ color: '#FFFFFF', textTransform: 'uppercase', textShadow: '0 4px 30px rgba(0,0,0,0.8)' }}>
                 GLORIOUS <br/> <span className="text-gradient-primary">SRI LANKAN FOOD</span>
               </h1>
@@ -69,8 +66,8 @@ export default function HomeClient({ menuItems }) {
                   Book a Table
                 </a>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
