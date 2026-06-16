@@ -173,7 +173,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
               display: 'flex', 
               overflowX: 'auto', 
               overflowY: 'hidden', // CRITICAL: Tells iOS NOT to trap vertical scrolling here
-              scrollSnapType: 'x proximity', // Changed from mandatory to proximity to reduce iOS scroll lock aggressiveness
+              scrollSnapType: 'x mandatory', // Restored to mandatory to ensure cards perfectly snap and never stop half-way
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
               gap: '16px',

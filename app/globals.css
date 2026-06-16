@@ -12,6 +12,8 @@
 
 html, body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Ensures hash links don't hide under the fixed top navbar */
 }
 
 * {
