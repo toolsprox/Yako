@@ -184,3 +184,68 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 40px 80px rgba(0,0,0,0.6);
 }
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE DESIGN (Media Queries)
+   ========================================================================== */
+
+/* Tablet & Smaller */
+@media (max-width: 992px) {
+  .section {
+    padding: 80px 0;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .section {
+    padding: 60px 0;
+  }
+
+  .heading-xl {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+  }
+
+  .heading-lg {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .glass {
+    border-radius: 16px; /* Slightly tighter corners on small screens */
+    padding: 30px !important; /* Force smaller padding on mobile glass panels */
+  }
+
+  .glass-nav {
+    padding: 12px 20px !important;
+    width: calc(100% - 32px) !important;
+    max-width: 100% !important;
+  }
+
+  /* Make sure buttons stretch nicely on mobile if needed, or just stay large tap targets */
+  .btn-primary, .btn-outline {
+    padding: 14px 24px;
+    font-size: 1rem;
+    min-height: 48px; /* Apple iOS accessibility tap target size */
+  }
+
+  /* Responsive Grid utilities */
+  .mobile-stack {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+}
+
+/* Extra Small Phones (iPhone SE, etc) */
+@media (max-width: 400px) {
+  .glass {
+    padding: 20px !important;
+  }
+  
+  .heading-xl {
+    font-size: 2.2rem;
+  }
+}

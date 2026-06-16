@@ -39,15 +39,15 @@ export default function MenuShowcase({ initialMenu = [] }) {
         style={{ 
           display: 'flex', 
           gap: '1rem', 
-          justifyContent: 'center', 
-          flexWrap: 'wrap',
-          padding: '1rem',
-          position: 'sticky',
-          top: '20px',
-          zIndex: 40,
-          background: 'rgba(0, 0, 0, 0.2)',
-          borderRadius: '50px',
-          border: '1px solid rgba(255,255,255,0.05)'
+          background: 'rgba(255, 255, 255, 0.03)', 
+          padding: '8px', 
+          borderRadius: '50px', 
+          width: 'max-content',
+          maxWidth: '100%',
+          overflowX: 'auto',
+          margin: '0 auto 4rem',
+          border: '1px solid rgba(255,255,255,0.05)',
+          WebkitOverflowScrolling: 'touch'
         }}
       >
         {categories.map((category) => (
@@ -97,6 +97,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
+            className="mobile-stack"
             style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}
           >
             {currentCategoryData.map((item, index) => (

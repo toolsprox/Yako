@@ -92,7 +92,7 @@ export default function HomeClient({ menuItems }) {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="glass"
+          className="glass mobile-stack"
           style={{ padding: '60px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '60px', alignItems: 'center' }}
         >
           <div>
