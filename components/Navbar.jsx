@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
+  const [activePath, setActivePath] = useState('');
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -16,6 +17,20 @@ export default function Navbar() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Track full path including hash for active state highlighting
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setActivePath(window.location.pathname + window.location.hash);
+      
+      const handleHashChange = () => {
+        setActivePath(window.location.pathname + window.location.hash);
+      };
+      
+      window.addEventListener('hashchange', handleHashChange);
+      return () => window.removeEventListener('hashchange', handleHashChange);
+    }
+  }, [pathname]);
 
   // Don't show public navbar on admin routes
   if (pathname.startsWith('/admin') || pathname.startsWith('/login')) {
@@ -135,12 +150,13 @@ export default function Navbar() {
           >
             {links.map((link) => {
               const Icon = link.icon;
-              const isActive = pathname === link.path || (pathname === '/' && link.path === '/#menu' && typeof window !== 'undefined' && window.location.hash === '#menu');
+              const isActive = activePath === link.path || (activePath === '/' && link.path === '/');
               
               return (
                 <Link 
                   key={link.name} 
                   href={link.path}
+                  onClick={() => setActivePath(link.path)}
                   style={{
                     textDecoration: 'none',
                     display: 'flex',
