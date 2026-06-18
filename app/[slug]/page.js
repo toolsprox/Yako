@@ -6,7 +6,8 @@ export const revalidate = 60; // Revalidate every 60 seconds
 
 export async function generateMetadata({ params }) {
   const supabase = await createServerSupabaseClient();
-  const slug = `/${params.slug}`;
+  const resolvedParams = await params;
+  const slug = `/${resolvedParams.slug}`;
 
   const { data: page } = await supabase
     .from('pages')
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }) {
 
 export default async function DynamicCMSPage({ params }) {
   const supabase = await createServerSupabaseClient();
-  const slug = `/${params.slug}`;
+  const resolvedParams = await params;
+  const slug = `/${resolvedParams.slug}`;
 
   // Check if the page exists in the database
   const { data: page, error } = await supabase
