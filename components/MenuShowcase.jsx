@@ -112,7 +112,7 @@ export default function MenuShowcase({ initialMenu = [] }) {
             <div style={{ marginBottom: '1rem', position: 'relative' }}>
               <h2 className="font-script heading-xl" style={{ textTransform: 'uppercase', color: '#fff', textShadow: '0 0 30px rgba(204,0,0,0.4)', display: 'inline-block' }}>{activeCategory}</h2>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem', alignItems: 'start' }}>
               {groupedMenu[activeCategory].map((item, index) => <BentoCard key={item.id} item={item} index={index} />)}
             </div>
           </div>
