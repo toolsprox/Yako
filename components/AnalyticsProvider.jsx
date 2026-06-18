@@ -125,33 +125,36 @@ function AnalyticsTracker() {
       });
     };
 
-    // Track page view on route change
-    const initTracking = async () => {
+    // Track page view instantly on route change
+    const initTracking = () => {
       if (!localStorage.getItem('yako_dummy_name')) {
         localStorage.setItem('yako_dummy_name', generateDummyName());
       }
 
-      // If we don't have geo data/fingerprint, OR if they are an old repeat user missing the new 'lat' field, fetch it once
-      if (!localStorage.getItem('yako_geo_city') || !localStorage.getItem('yako_geo_lat')) {
-        try {
-          // Using geojs.io as it has no CORS issues and is free/unlimited
-          const res = await fetch('https://get.geojs.io/v1/ip/geo.json');
-          const data = await res.json();
-          if (data.city) localStorage.setItem('yako_geo_city', data.city);
-          if (data.country) localStorage.setItem('yako_geo_country', data.country);
-          if (data.latitude) localStorage.setItem('yako_geo_lat', data.latitude);
-          if (data.longitude) localStorage.setItem('yako_geo_lng', data.longitude);
-          
-          if (data.ip) {
-            const rawFingerprint = `${data.ip}-${navigator.userAgent}-${window.screen.width}x${window.screen.height}`;
-            const hash = await generateFingerprintHash(rawFingerprint);
-            localStorage.setItem('yako_fingerprint', hash);
-          }
-        } catch (e) {
-          console.error("Geo fetch failed:", e);
-        }
-      }
+      // 1. FIRE INSTANTLY: Do not wait for any API calls to track the page view
       trackEvent();
+
+      // 2. BACKGROUND FETCH: If we don't have geo data, fetch it asynchronously
+      if (!localStorage.getItem('yako_geo_city') || !localStorage.getItem('yako_geo_lat')) {
+        fetch('https://get.geojs.io/v1/ip/geo.json')
+          .then(res => res.json())
+          .then(async (data) => {
+            if (data.city) localStorage.setItem('yako_geo_city', data.city);
+            if (data.country) localStorage.setItem('yako_geo_country', data.country);
+            if (data.latitude) localStorage.setItem('yako_geo_lat', data.latitude);
+            if (data.longitude) localStorage.setItem('yako_geo_lng', data.longitude);
+            
+            if (data.ip) {
+              const rawFingerprint = `${data.ip}-${navigator.userAgent}-${window.screen.width}x${window.screen.height}`;
+              const hash = await generateFingerprintHash(rawFingerprint);
+              localStorage.setItem('yako_fingerprint', hash);
+            }
+            
+            // 3. BACKFILL INSTANTLY: Fire a lightweight update to inject the new coordinates into Supabase
+            trackEvent('location_update');
+          })
+          .catch(e => console.error("Geo fetch failed:", e));
+      }
     };
 
     initTracking();
