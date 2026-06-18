@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import DynamicTracker from '@/components/DynamicTracker';
+import DynamicPromotions from '@/components/promotions/DynamicPromotions';
 import SmoothScroll from '@/components/SmoothScroll';
 
 export const metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <body>
         <AnalyticsProvider>
           <DynamicTracker />
+          <DynamicPromotions />
           <SmoothScroll>
             <Navbar />
             <main>{children}</main>
