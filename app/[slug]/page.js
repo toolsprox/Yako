@@ -5,7 +5,7 @@ import BlockRenderer from '@/components/cms/BlockRenderer';
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export async function generateMetadata({ params }) {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const slug = `/${params.slug}`;
 
   const { data: page } = await supabase
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function DynamicCMSPage({ params }) {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const slug = `/${params.slug}`;
 
   // Check if the page exists in the database
