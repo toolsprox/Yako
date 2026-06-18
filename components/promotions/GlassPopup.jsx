@@ -2,24 +2,32 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import usePromotionTiming from '@/hooks/usePromotionTiming';
 
 export default function GlassPopup({ promotion }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
+  const isTriggered = usePromotionTiming(promotion.content.timing);
   const { id, content } = promotion;
 
   useEffect(() => {
-    // Check if the user already dismissed this specific popup
-    const dismissed = sessionStorage.getItem(`dismissed_promo_${id}`);
-    if (!dismissed) {
-      // Small delay before showing the popup
-      const timer = setTimeout(() => setIsVisible(true), 500);
-      return () => clearTimeout(timer);
+    // Check if dismissed in this session
+    const dismissed = sessionStorage.getItem(`promo_dismissed_${id}`);
+    if (dismissed) {
+      setIsDismissed(true);
     }
   }, [id]);
 
+  useEffect(() => {
+    if (isTriggered && !isDismissed) {
+      setIsVisible(true);
+    }
+  }, [isTriggered, isDismissed]);
+
   const handleClose = () => {
     setIsVisible(false);
-    sessionStorage.setItem(`dismissed_promo_${id}`, 'true');
+    sessionStorage.setItem(`promo_dismissed_${id}`, 'true');
+    setIsDismissed(true);
   };
 
   return (

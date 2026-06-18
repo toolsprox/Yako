@@ -6,6 +6,8 @@ import { createBrowserSupabaseClient } from '@/lib/supabase-browser';
 import GlassPopup from './GlassPopup';
 import TopAnnouncementBar from './TopAnnouncementBar';
 import Effects from './Effects';
+import SlideInToast from './SlideInToast';
+import CountdownBanner from './CountdownBanner';
 
 export default function DynamicPromotions() {
   const pathname = usePathname();
@@ -45,6 +47,12 @@ export default function DynamicPromotions() {
         }
         if (promo.promo_type === 'top_bar') {
           return <TopAnnouncementBar key={promo.id} promotion={promo} />;
+        }
+        if (promo.promo_type === 'toast') {
+          return <SlideInToast key={promo.id} promotion={promo} />;
+        }
+        if (promo.promo_type === 'countdown') {
+          return <CountdownBanner key={promo.id} promotion={promo} />;
         }
         if (promo.promo_type === 'effect_confetti' || promo.promo_type === 'effect_snow') {
           return <Effects key={promo.id} type={promo.promo_type} />;
