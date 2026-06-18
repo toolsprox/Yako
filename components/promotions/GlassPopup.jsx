@@ -12,7 +12,7 @@ export default function GlassPopup({ promotion }) {
     const dismissed = sessionStorage.getItem(`dismissed_promo_${id}`);
     if (!dismissed) {
       // Small delay before showing the popup
-      const timer = setTimeout(() => setIsVisible(true), 2000);
+      const timer = setTimeout(() => setIsVisible(true), 500);
       return () => clearTimeout(timer);
     }
   }, [id]);
@@ -60,7 +60,7 @@ export default function GlassPopup({ promotion }) {
             </button>
             
             {content.image_url && (
-              <div style={{ width: '100%', height: '200px', backgroundImage: `url(${content.image_url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              <div style={{ width: '100%', height: '200px', backgroundImage: `url("${content.image_url}")`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
             )}
             
             <div style={{ padding: '30px', textAlign: 'center' }}>
