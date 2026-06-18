@@ -16,7 +16,12 @@ export default function BookingSystem() {
 
   const handleNext = (e) => {
     e.preventDefault();
-    if (step === 1) setStep(2);
+    if (step === 1) {
+      setStep(2);
+      if (typeof window !== 'undefined' && window.trackYakoEvent) {
+        window.trackYakoEvent('reservation_start', { path: '/book' });
+      }
+    }
     else handleSubmit();
   };
 
@@ -41,8 +46,8 @@ export default function BookingSystem() {
         toast.success('Reservation request sent successfully!', { id: loadingToast });
         
         // Track conversion if analytics are set up
-        if (typeof window !== 'undefined' && window.trackConversion) {
-          window.trackConversion('booking_request', formData);
+        if (typeof window !== 'undefined' && window.trackYakoEvent) {
+          window.trackYakoEvent('reservation_complete', { path: '/book' });
         }
         
         // Reset form
@@ -66,8 +71,8 @@ export default function BookingSystem() {
   };
 
   const handleWhatsApp = () => {
-    if (typeof window !== 'undefined' && window.trackConversion) {
-      window.trackConversion('whatsapp_booking_click', {});
+    if (typeof window !== 'undefined' && window.trackYakoEvent) {
+      window.trackYakoEvent('whatsapp_click', { path: '/book' });
     }
     const message = encodeURIComponent(`Hi, I would like to reserve a table at Yako London.\nDate: ${formData.date || '[Date]'}\nTime: ${formData.time || '[Time]'}\nGuests: ${formData.guests}`);
     window.open(`https://wa.me/447000000000?text=${message}`, '_blank');
