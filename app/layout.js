@@ -2,6 +2,7 @@ import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
+import DynamicTracker from '@/components/DynamicTracker';
 import SmoothScroll from '@/components/SmoothScroll';
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <AnalyticsProvider>
+          <DynamicTracker />
           <SmoothScroll>
             <Navbar />
             <main>{children}</main>
