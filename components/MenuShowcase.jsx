@@ -154,7 +154,8 @@ export default function MenuShowcase({ initialMenu = [] }) {
               scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
               gap: '16px',
-              paddingBottom: '20px' // Space for shadow
+              paddingBottom: '20px', // Space for shadow
+              alignItems: 'start' // CRITICAL: Prevents columns with 1 item from stretching to the height of columns with 10 items
             }}
           >
             {categories.map((category) => (
