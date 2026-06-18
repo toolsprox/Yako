@@ -1,5 +1,5 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server';
-import MenuGrid from '@/components/menu/MenuGrid';
+import MenuShowcase from '@/components/MenuShowcase';
 
 export default async function MenuHighlightsBlock({ data }) {
   const supabase = createServerSupabaseClient();
@@ -16,7 +16,7 @@ export default async function MenuHighlightsBlock({ data }) {
   return (
     <div style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto' }}>
       {data.title && <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '40px', color: '#fff' }}>{data.title}</h2>}
-      <MenuGrid items={menuItems} />
+      <MenuShowcase initialMenu={menuItems} />
     </div>
   );
 }
