@@ -163,17 +163,24 @@ function AnalyticsTracker() {
       trackEvent('heartbeat');
     }, 30000); // 30s heartbeat
 
+    let hasFiredLeave = false;
+
     // Track the exact moment the user leaves the page or closes the tab
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
+    // We use both visibilitychange (desktop) and pagehide (mobile/iOS)
+    const handlePageLeave = (e) => {
+      if (!hasFiredLeave && (document.visibilityState === 'hidden' || e?.type === 'pagehide')) {
+        hasFiredLeave = true;
         trackEvent('page_leave');
       }
     };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    document.addEventListener('visibilitychange', handlePageLeave);
+    window.addEventListener('pagehide', handlePageLeave);
 
     return () => {
       clearInterval(interval);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handlePageLeave);
+      window.removeEventListener('pagehide', handlePageLeave);
     };
   }, [pathname, searchParams]);
 
