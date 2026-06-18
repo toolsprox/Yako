@@ -2,7 +2,7 @@ import { createServerSupabaseClient } from '@/lib/supabase-server';
 import MenuShowcase from '@/components/MenuShowcase';
 
 export default async function MenuHighlightsBlock({ data }) {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   
   // Fetch top 3 most popular items or just random 3 items for highlights
   const { data: menuItems } = await supabase
