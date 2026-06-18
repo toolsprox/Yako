@@ -11,9 +11,9 @@ export default function GlassPopup({ promotion }) {
   const { id, content } = promotion;
 
   useEffect(() => {
-    // Check if dismissed in this session
-    const dismissed = sessionStorage.getItem(`promo_dismissed_${id}`);
-    if (dismissed) {
+    // Only permanently dismiss if they took action, not if they just closed it
+    const actionTaken = sessionStorage.getItem(`promo_action_${id}`);
+    if (actionTaken) {
       setIsDismissed(true);
     }
   }, [id]);
@@ -26,69 +26,77 @@ export default function GlassPopup({ promotion }) {
 
   const handleClose = () => {
     setIsVisible(false);
-    sessionStorage.setItem(`promo_dismissed_${id}`, 'true');
-    setIsDismissed(true);
+  };
+
+  const handleAction = () => {
+    sessionStorage.setItem(`promo_action_${id}`, 'true');
+    setIsVisible(false);
   };
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.95 }}
           style={{
-            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)',
-            zIndex: 9999, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px'
+            position: 'fixed',
+            bottom: '40px',
+            left: '40px',
+            zIndex: 9999,
+            background: 'rgba(20, 20, 20, 0.6)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '20px',
+            padding: '30px',
+            width: '400px',
+            maxWidth: 'calc(100vw - 40px)',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
           }}
-          onClick={handleClose}
         >
-          <motion.div 
-            initial={{ scale: 0.9, y: 20 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.9, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          <button 
+            onClick={handleClose}
             style={{
-              background: 'rgba(20, 20, 20, 0.8)', border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '16px', overflow: 'hidden', maxWidth: '450px', width: '100%',
-              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', position: 'relative'
+              position: 'absolute', top: '15px', right: '15px',
+              background: 'rgba(255,255,255,0.1)', border: 'none', color: '#A1A1AA',
+              cursor: 'pointer', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}
-            onClick={e => e.stopPropagation()}
           >
-            <button 
-              onClick={handleClose}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+          
+          {content.image_url && (
+            <img src={content.image_url} alt="Promo" style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '12px', marginBottom: '20px' }} />
+          )}
+
+          <h2 style={{ margin: '0 0 10px 0', color: '#fff', fontSize: '1.5rem', fontFamily: 'var(--font-script)' }}>
+            {content.title}
+          </h2>
+          
+          <p style={{ margin: '0 0 20px 0', color: '#D1D5DB', fontSize: '0.95rem', lineHeight: 1.5 }}>
+            {content.subtitle}
+          </p>
+          
+          {content.button_text && content.button_link && (
+            <a 
+              href={content.button_link}
+              onClick={handleAction}
               style={{
-                position: 'absolute', top: '15px', right: '15px', background: 'rgba(255,255,255,0.1)',
-                border: 'none', color: '#fff', width: '30px', height: '30px', borderRadius: '50%',
-                cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 10
+                display: 'block',
+                background: 'var(--primary)',
+                color: '#fff',
+                textAlign: 'center',
+                padding: '12px 20px',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                transition: 'background 0.3s ease'
               }}
             >
-              ×
-            </button>
-            
-            {content.image_url && (
-              <div style={{ width: '100%', height: '200px', backgroundImage: `url("${content.image_url}")`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-            )}
-            
-            <div style={{ padding: '30px', textAlign: 'center' }}>
-              {content.title && <h2 style={{ fontSize: '1.5rem', marginBottom: '10px', color: '#fff' }}>{content.title}</h2>}
-              {content.subtitle && <p style={{ color: '#A1A1AA', marginBottom: '25px', lineHeight: 1.6 }}>{content.subtitle}</p>}
-              
-              {content.button_text && content.button_link && (
-                <a 
-                  href={content.button_link}
-                  style={{
-                    display: 'inline-block', background: 'var(--primary)', color: '#fff',
-                    padding: '12px 30px', borderRadius: '30px', textDecoration: 'none',
-                    fontWeight: 600, transition: 'all 0.2s', letterSpacing: '1px'
-                  }}
-                >
-                  {content.button_text}
-                </a>
-              )}
-            </div>
-          </motion.div>
+              {content.button_text}
+            </a>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

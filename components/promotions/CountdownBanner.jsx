@@ -20,7 +20,7 @@ export default function CountdownBanner({ promotion }) {
       const now = new Date().getTime();
       const distance = targetDate - now;
 
-      if (distance < 0) {
+      if (isNaN(distance) || distance < 0) {
         setIsExpired(true);
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
