@@ -163,7 +163,18 @@ function AnalyticsTracker() {
       trackEvent('heartbeat');
     }, 30000); // 30s heartbeat
 
-    return () => clearInterval(interval);
+    // Track the exact moment the user leaves the page or closes the tab
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        trackEvent('page_leave');
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [pathname, searchParams]);
 
   // Expose track manual to window for global access
