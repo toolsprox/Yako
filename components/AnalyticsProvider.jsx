@@ -131,8 +131,8 @@ function AnalyticsTracker() {
         localStorage.setItem('yako_dummy_name', generateDummyName());
       }
 
-      // If we don't have geo data/fingerprint, fetch it once
-      if (!localStorage.getItem('yako_geo_city')) {
+      // If we don't have geo data/fingerprint, OR if they are an old repeat user missing the new 'lat' field, fetch it once
+      if (!localStorage.getItem('yako_geo_city') || !localStorage.getItem('yako_geo_lat')) {
         try {
           // Using geojs.io as it has no CORS issues and is free/unlimited
           const res = await fetch('https://get.geojs.io/v1/ip/geo.json');
