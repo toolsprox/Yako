@@ -1,6 +1,7 @@
 'use client';
 
 import MenuShowcase from '@/components/MenuShowcase';
+import CultureShowcase from '@/components/CultureShowcase';
 import BookingSystem from '@/components/BookingSystem';
 import { MapPin, Clock, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -70,6 +71,9 @@ export default function HomeClient({ menuItems }) {
           </div>
         </div>
       </section>
+
+      {/* Deep Dive: Culture & Nostalgia */}
+      <CultureShowcase />
 
       {/* Menu Highlight Section */}
       <section id="menu" style={{ padding: '100px 20px', position: 'relative', zIndex: 1 }}>

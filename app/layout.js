@@ -2,6 +2,7 @@ import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
+import SmoothScroll from '@/components/SmoothScroll';
 
 export const metadata = {
   title: 'Yako London | Authentic Sri Lankan Cuisine in Pinner',
@@ -15,8 +16,10 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <AnalyticsProvider>
-          <Navbar />
-          <main>{children}</main>
+          <SmoothScroll>
+            <Navbar />
+            <main>{children}</main>
+          </SmoothScroll>
           <Toaster 
             position="top-center" 
             toastOptions={{
