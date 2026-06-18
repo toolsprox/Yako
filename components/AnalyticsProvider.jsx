@@ -93,6 +93,8 @@ function AnalyticsTracker() {
       // Get Geo data if it exists
       const city = localStorage.getItem('yako_geo_city') || '';
       const country = localStorage.getItem('yako_geo_country') || '';
+      const lat = localStorage.getItem('yako_geo_lat') || null;
+      const lng = localStorage.getItem('yako_geo_lng') || null;
       const fingerprint = localStorage.getItem('yako_fingerprint') || '';
       const dummyName = localStorage.getItem('yako_dummy_name') || '';
 
@@ -116,6 +118,8 @@ function AnalyticsTracker() {
         p_landing_page: window.location.href,
         p_city: city,
         p_country: country,
+        p_lat: lat,
+        p_lng: lng,
         p_dummy_name: dummyName,
         p_fingerprint: fingerprint
       });
@@ -135,6 +139,8 @@ function AnalyticsTracker() {
           const data = await res.json();
           if (data.city) localStorage.setItem('yako_geo_city', data.city);
           if (data.country) localStorage.setItem('yako_geo_country', data.country);
+          if (data.latitude) localStorage.setItem('yako_geo_lat', data.latitude);
+          if (data.longitude) localStorage.setItem('yako_geo_lng', data.longitude);
           
           if (data.ip) {
             const rawFingerprint = `${data.ip}-${navigator.userAgent}-${window.screen.width}x${window.screen.height}`;
@@ -166,6 +172,8 @@ function AnalyticsTracker() {
       const sessionId = sessionStorage.getItem('yako_session_id');
       const city = localStorage.getItem('yako_geo_city') || '';
       const country = localStorage.getItem('yako_geo_country') || '';
+      const lat = localStorage.getItem('yako_geo_lat') || null;
+      const lng = localStorage.getItem('yako_geo_lng') || null;
       const fingerprint = localStorage.getItem('yako_fingerprint') || '';
       const dummyName = localStorage.getItem('yako_dummy_name') || '';
       
@@ -180,6 +188,7 @@ function AnalyticsTracker() {
           p_os: getOSInfo(),
           p_source: '', p_referrer: '', p_landing_page: '',
           p_city: city, p_country: country,
+          p_lat: lat, p_lng: lng,
           p_dummy_name: dummyName,
           p_fingerprint: fingerprint
         });
