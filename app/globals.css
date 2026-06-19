@@ -128,8 +128,6 @@ body {
 
 .btn-primary:hover {
   background-color: var(--primary-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(204, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-outline {
@@ -150,10 +148,17 @@ body {
   gap: 8px;
 }
 
-.btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(204, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px);
+  }
 }
 
 /* Layout Utilities */
@@ -177,11 +182,14 @@ body {
 .hover-scale {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
 }
-.hover-scale:hover {
-  transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+
+@media (hover: hover) {
+  .hover-scale:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
 }
 
 /* ==========================================================================
