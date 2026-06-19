@@ -24,18 +24,19 @@ const staggerContainer = {
 
 export default function HomeClient({ menuItems, locationName }) {
   const [showIntro, setShowIntro] = useState(true);
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
   };
 
   return (
-    <div style={{ paddingBottom: '100px', overflowX: 'hidden', position: 'relative' }}>
+    <div style={{ 
+      paddingBottom: showIntro ? '0' : '100px', 
+      overflowX: 'hidden', 
+      overflowY: showIntro ? 'hidden' : 'visible',
+      height: showIntro ? '100vh' : 'auto',
+      position: 'relative' 
+    }}>
       
       {/* Background Aurora / Gradient Orbs for Glassmorphism to blur */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -2, pointerEvents: 'none', overflow: 'hidden' }}>
@@ -83,7 +84,7 @@ export default function HomeClient({ menuItems, locationName }) {
         <motion.div 
           className="container" 
           key={showIntro ? 'waiting' : 'ready'}
-          initial={hasMounted && showIntro ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 }}
+          initial={showIntro ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 }}
           animate={!showIntro ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
           style={{ maxWidth: '900px', position: 'relative', zIndex: 2 }}
