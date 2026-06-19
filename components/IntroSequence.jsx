@@ -48,34 +48,26 @@ export default function IntroSequence({ onComplete }) {
       <style>
         {`
           .spilled-text {
-            fill: transparent;
-            stroke: var(--primary);
-            stroke-width: 0.6px;
-            stroke-dasharray: 600;
-            stroke-dashoffset: 600;
-            animation: draw-spilled 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            fill: var(--primary);
+            opacity: 0;
+            animation: fade-spilled 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             font-family: system-ui, -apple-system, sans-serif;
             font-weight: 300;
             white-space: nowrap;
-            will-change: stroke-dashoffset, stroke, fill, text-shadow;
+            will-change: opacity, text-shadow;
             transform: translateZ(0);
           }
           
-          @keyframes draw-spilled {
+          @keyframes fade-spilled {
             0% { 
-              stroke-dashoffset: 600; 
-              fill: transparent; 
-              stroke: rgba(255,100,0,0.8); 
+              opacity: 0; 
+              text-shadow: 0px 0px 25px rgba(255, 100, 0, 0);
             }
             70% { 
-              stroke-dashoffset: 0; 
-              fill: transparent; 
-              stroke: var(--primary); 
+              opacity: 0.8; 
             }
             100% { 
-              stroke-dashoffset: 0; 
-              fill: var(--primary); 
-              stroke: transparent;
+              opacity: 1; 
               text-shadow: 0px 0px 15px rgba(255, 100, 0, 0.6);
             }
           }

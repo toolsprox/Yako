@@ -104,8 +104,9 @@ export default function BookingSystem() {
         {step === 1 ? (
           <>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={labelStyle}>Date</label>
+              <label htmlFor="booking-date" style={labelStyle}>Date</label>
               <input 
+                id="booking-date"
                 type="date" 
                 required
                 className="glass-input"
@@ -116,8 +117,9 @@ export default function BookingSystem() {
             </div>
             <div style={{ display: 'flex', gap: '1.5rem' }}>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <label style={labelStyle}>Time</label>
+                <label htmlFor="booking-time" style={labelStyle}>Time</label>
                 <input 
+                  id="booking-time"
                   type="time" 
                   required
                   className="glass-input"
@@ -127,8 +129,9 @@ export default function BookingSystem() {
                 />
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <label style={labelStyle}>Guests</label>
+                <label htmlFor="booking-guests" style={labelStyle}>Guests</label>
                 <select 
+                  id="booking-guests"
                   className="glass-input"
                   value={formData.guests}
                   onChange={e => setFormData({...formData, guests: e.target.value})}
@@ -143,8 +146,9 @@ export default function BookingSystem() {
         ) : (
           <>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={labelStyle}>Full Name</label>
+              <label htmlFor="booking-name" style={labelStyle}>Full Name</label>
               <input 
+                id="booking-name"
                 type="text" 
                 required
                 className="glass-input"
@@ -155,8 +159,9 @@ export default function BookingSystem() {
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={labelStyle}>Phone Number</label>
+              <label htmlFor="booking-phone" style={labelStyle}>Phone Number</label>
               <input 
+                id="booking-phone"
                 type="tel" 
                 required
                 className="glass-input"

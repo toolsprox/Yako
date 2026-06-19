@@ -1,13 +1,15 @@
 'use client';
 
-import MenuShowcase from '@/components/MenuShowcase';
-import CultureShowcase from '@/components/CultureShowcase';
-import BookingSystem from '@/components/BookingSystem';
 import SriLankaMap from '@/components/SriLankaMap';
 import IntroSequence from '@/components/IntroSequence';
 import { MapPin, Clock, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const MenuShowcase = dynamic(() => import('@/components/MenuShowcase'));
+const CultureShowcase = dynamic(() => import('@/components/CultureShowcase'));
+const BookingSystem = dynamic(() => import('@/components/BookingSystem'));
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
