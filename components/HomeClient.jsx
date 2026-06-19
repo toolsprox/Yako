@@ -40,18 +40,7 @@ export default function HomeClient({ menuItems, locationName }) {
   };
 
   return (
-    <>
-      <AnimatePresence>
-        {showIntro && <IntroSequence onComplete={handleIntroComplete} />}
-      </AnimatePresence>
-
-      <motion.div 
-        key={showIntro ? 'waiting' : 'ready'}
-        initial={hasMounted && showIntro ? { scale: 0.95, opacity: 0 } : { scale: 1, opacity: 1 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        style={{ paddingBottom: '100px', overflowX: 'hidden', position: 'relative' }}
-      >
+    <div style={{ paddingBottom: '100px', overflowX: 'hidden', position: 'relative' }}>
       
       {/* Background Aurora / Gradient Orbs for Glassmorphism to blur */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -2, pointerEvents: 'none', overflow: 'hidden' }}>
@@ -95,7 +84,18 @@ export default function HomeClient({ menuItems, locationName }) {
           <SriLankaMap width="min(90vw, 500px)" height="min(90vh, 700px)" />
         </div>
 
-        <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 2 }}>
+        <AnimatePresence>
+          {showIntro && <IntroSequence onComplete={handleIntroComplete} />}
+        </AnimatePresence>
+
+        <motion.div 
+          className="container" 
+          key={showIntro ? 'waiting' : 'ready'}
+          initial={hasMounted && showIntro ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 }}
+          animate={!showIntro ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          style={{ maxWidth: '900px', position: 'relative', zIndex: 2 }}
+        >
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}>
              {/* Authentic Sri Lankan Greeting Fallback */}
@@ -141,7 +141,7 @@ export default function HomeClient({ menuItems, locationName }) {
             </a>
           </motion.div>
 
-        </div>
+        </motion.div>
       </section>
 
       {/* Deep Dive: Culture & Nostalgia */}
@@ -223,7 +223,6 @@ export default function HomeClient({ menuItems, locationName }) {
       </section>
 
       </div> {/* END DARK THEME SECTION */}
-      </motion.div>
-    </>
+    </div>
   );
 }

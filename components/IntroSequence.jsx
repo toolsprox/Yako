@@ -34,14 +34,13 @@ export default function IntroSequence({ onComplete }) {
         ease: "easeInOut" 
       }}
       style={{
-        position: 'fixed',
+        position: 'absolute',
         inset: 0,
-        zIndex: 9999,
+        zIndex: 10,
         pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        background: 'var(--background)'
+        justifyContent: 'center'
       }}
     >
       <style>
@@ -79,8 +78,7 @@ export default function IntroSequence({ onComplete }) {
         `}
       </style>
 
-      {/* Noise texture overlay for a premium cinematic feel */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none', backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.03%22/%3E%3C/svg%3E")' }}></div>
+
 
       {greetings.map((g, i) => (
         <svg 
