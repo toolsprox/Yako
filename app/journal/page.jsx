@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function JournalIndex() {
   const journals = getAllJournals();
-
+  return (
     <>
     <style>{`
       .journal-hub-container {
