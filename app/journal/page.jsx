@@ -9,8 +9,22 @@ export const metadata = {
 export default function JournalIndex() {
   const journals = getAllJournals();
 
-  return (
-    <div className="dark-theme" style={{ minHeight: '100vh', paddingTop: '120px', paddingBottom: '100px', background: 'var(--background)' }}>
+    <>
+    <style>{`
+      .journal-hub-container {
+        min-height: 100vh;
+        padding-top: 120px;
+        padding-bottom: 100px;
+        background: var(--background);
+      }
+      @media (max-width: 768px) {
+        .journal-hub-container {
+          padding-top: 80px;
+          padding-bottom: 60px;
+        }
+      }
+    `}</style>
+    <div className="dark-theme journal-hub-container">
       <div className="container" style={{ maxWidth: '1200px' }}>
         
         <header style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -29,8 +43,8 @@ export default function JournalIndex() {
         ) : (
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', 
-            gap: '2.5rem' 
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', 
+            gap: '2rem' 
           }}>
             {journals.map((journal) => (
               <Link 
@@ -89,5 +103,6 @@ export default function JournalIndex() {
         )}
       </div>
     </div>
+    </>
   );
 }

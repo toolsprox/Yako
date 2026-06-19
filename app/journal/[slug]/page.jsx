@@ -44,7 +44,7 @@ export default async function JournalArticle({ params }) {
       }} />
 
       {/* Article Hero */}
-      <header style={{ 
+      <header className="journal-article-header" style={{ 
         paddingTop: '120px', 
         paddingBottom: '60px', 
         textAlign: 'center',
@@ -71,7 +71,7 @@ export default async function JournalArticle({ params }) {
             </time>
           </div>
           
-          <h1 style={{ 
+          <h1 className="journal-article-title" style={{ 
             fontSize: 'clamp(3rem, 6vw, 5rem)', 
             lineHeight: 1.05, 
             marginBottom: '2rem',
@@ -188,6 +188,38 @@ export default async function JournalArticle({ params }) {
             border: 0;
             border-top: 2px dashed rgba(255,255,255,0.1);
             margin: 3rem 0;
+          }
+
+          /* Mobile Responsiveness */
+          @media (max-width: 768px) {
+            .journal-article-header {
+              padding-top: 80px !important;
+              padding-bottom: 30px !important;
+            }
+            .journal-article-title {
+              font-size: clamp(2rem, 8vw, 3rem) !important;
+              margin-bottom: 1.5rem !important;
+            }
+            .prose {
+              font-size: 1.1rem;
+              line-height: 1.7;
+            }
+            .prose > p:first-of-type::first-letter {
+              font-size: 4rem;
+              padding-right: 0.5rem;
+              padding-top: 0.1rem;
+            }
+            .prose h2 {
+              font-size: 1.8rem;
+              margin-top: 2.5rem;
+            }
+            .prose h3 {
+              font-size: 1.15rem;
+              margin-top: 2rem;
+            }
+            .prose hr {
+              margin: 2rem 0;
+            }
           }
         `}</style>
         
