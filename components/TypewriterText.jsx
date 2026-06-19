@@ -31,41 +31,43 @@ export default function TypewriterText({ text }) {
     },
   };
 
-  return (
-    <motion.p
-      style={{ 
-        color: '#D1D5DB', 
-        fontSize: '1.2rem', 
-        lineHeight: 1.8, 
-        fontWeight: 300, 
-        display: 'inline-flex', 
-        flexWrap: 'wrap', 
-        columnGap: '6px' 
-      }}
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-    >
-      {words.map((word, index) => {
-        let isWhite = word.includes('*');
-        let isPrimary = word.includes('~');
-        
-        let displayWord = word.replace(/[*~]/g, '');
-
-        return (
-          <motion.span
-            variants={child}
-            key={index}
-            style={{
-              color: isPrimary ? 'var(--primary)' : isWhite ? '#fff' : 'inherit',
-              fontWeight: isPrimary || isWhite ? 500 : 300,
-            }}
-          >
-            {displayWord}
-          </motion.span>
-        );
-      })}
-    </motion.p>
-  );
+    return (
+      <motion.p
+        style={{ 
+          color: 'var(--foreground)', 
+          opacity: 0.85,
+          fontSize: '1.2rem', 
+          lineHeight: 1.8, 
+          fontWeight: 400, 
+          display: 'inline-flex', 
+          flexWrap: 'wrap', 
+          columnGap: '6px' 
+        }}
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {words.map((word, index) => {
+          let isWhite = word.includes('*');
+          let isPrimary = word.includes('~');
+          
+          let displayWord = word.replace(/[*~]/g, '');
+  
+          return (
+            <motion.span
+              variants={child}
+              key={index}
+              style={{
+                color: isPrimary ? 'var(--primary)' : isWhite ? 'var(--foreground)' : 'inherit',
+                fontWeight: isPrimary || isWhite ? 600 : 400,
+                opacity: isWhite ? 1 : 'inherit'
+              }}
+            >
+              {displayWord}
+            </motion.span>
+          );
+        })}
+      </motion.p>
+    );
 }

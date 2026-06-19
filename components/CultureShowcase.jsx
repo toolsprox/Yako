@@ -25,14 +25,20 @@ export default function CultureShowcase() {
 
   const bgColor = useTransform(
     smoothColorScroll,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    [0, 0.09, 0.18, 0.27, 0.36, 0.45, 0.54, 0.63, 0.72, 0.81, 0.9, 1],
     [
-      "rgba(10, 10, 10, 1)",      
-      "rgba(62, 39, 35, 1)",      
-      "rgba(26, 35, 126, 1)",     
-      "rgba(0, 77, 64, 1)",       
-      "rgba(136, 14, 79, 1)",     
-      "rgba(10, 10, 10, 1)"       
+      "rgba(255, 202, 40, 0.5)",   // 1. Cricket: Saffron Yellow (Youth, Sun, Energy)
+      "rgba(255, 138, 101, 0.5)",  // 2. TV: Sunset Orange (Nostalgia, Evening Warmth)
+      "rgba(255, 112, 67, 0.5)",   // 3. Kitchen: Spicy Coral (Heat, Spice, Comfort)
+      "rgba(79, 195, 247, 0.5)",   // 4. Choon Paan: Sky Blue (Air, Sound, Unexpected Joy)
+      "rgba(240, 98, 146, 0.5)",   // 5. Bombai Motai: Bright Pink (Sweetness, Childhood Magic)
+      "rgba(255, 241, 118, 0.6)",  // 6. School Van: Canary Yellow (School, Morning Sun, Camaraderie)
+      "rgba(239, 83, 80, 0.4)",    // 7. Papare: Crimson Red (Passion, Noise, Rivalry)
+      "rgba(38, 166, 154, 0.4)",   // 8. Monsoon: Deep Teal (Rain, Water, Coolness)
+      "rgba(255, 167, 38, 0.5)",   // 9. Avurudu: Golden Orange (Festivals, Fire, Tradition)
+      "rgba(66, 165, 245, 0.4)",   // 10. Blue Train: Azure Blue (Train, Hills, Cold Breeze)
+      "rgba(171, 71, 188, 0.3)",   // 11. Baila: Vibrant Magenta (Party, Dance, Nightlife)
+      "rgba(255, 179, 0, 0.5)"     // 12. Sunday Lunch: Ochre / Curry Yellow (Turmeric, Fullness, Rest)
     ]
   );
 
@@ -61,8 +67,8 @@ export default function CultureShowcase() {
       style={{ cursor: 'pointer', position: 'relative', width: '100%', height: isMobile ? '250px' : '350px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', zIndex: 10 }}
     >
       <Image src={imageSrc} alt={alt} fill style={{ objectFit: 'cover', transition: 'transform 0.5s, filter 0.5s' }} className="scene-image" />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%)' }} />
-      <div className="tooltip-overlay" style={{ position: 'absolute', bottom: '15px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(0,0,0,0.8)', padding: '6px 16px', borderRadius: '20px', fontSize: '0.9rem', opacity: isMobile ? 1 : 0, transition: 'opacity 0.3s', pointerEvents: 'none', border: '1px solid var(--primary)', whiteSpace: 'nowrap' }}>
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent 50%)' }} />
+      <div className="tooltip-overlay" style={{ position: 'absolute', bottom: '15px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.9)', padding: '6px 16px', borderRadius: '20px', fontSize: '0.9rem', opacity: isMobile ? 1 : 0, transition: 'opacity 0.3s', pointerEvents: 'none', border: '1px solid var(--primary)', whiteSpace: 'nowrap' }}>
         <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>▶ {title}</span>
       </div>
     </motion.div>
@@ -98,14 +104,14 @@ export default function CultureShowcase() {
 
     return (
       <div ref={ref} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 5, overflow: 'visible' }}>
-         <motion.div style={{ position: 'absolute', top: '50%', left: '50%', x, y, rotate, scale, opacity, fontSize: isMobile ? '3rem' : '5rem', filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.6))', marginTop: isMobile ? '-1.5rem' : '-2.5rem', marginLeft: isMobile ? '-1.5rem' : '-2.5rem' }}>
+         <motion.div style={{ position: 'absolute', top: '50%', left: '50%', x, y, rotate, scale, opacity, fontSize: isMobile ? '3rem' : '5rem', filter: 'drop-shadow(0 0 30px rgba(0,0,0,0.2))', marginTop: isMobile ? '-1.5rem' : '-2.5rem', marginLeft: isMobile ? '-1.5rem' : '-2.5rem' }}>
            {element}
          </motion.div>
       </div>
     );
   };
 
-  const titleStyle = { fontSize: isMobile ? '2rem' : '3rem', color: '#fff', marginBottom: '1.5rem', textShadow: '0 2px 10px rgba(0,0,0,0.8)' };
+  const titleStyle = { fontSize: isMobile ? '2rem' : '3rem', color: 'var(--primary)', marginBottom: '1.5rem' };
 
   return (
     <motion.section ref={containerRef} style={{ position: 'relative', width: '100%', padding: isMobile ? '80px 0' : '150px 0', overflow: 'hidden', backgroundColor: bgColor }}>
@@ -123,7 +129,7 @@ export default function CultureShowcase() {
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         
         <div style={{ textAlign: 'center', marginBottom: isMobile ? '4rem' : '8rem' }}>
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={textVariants} className="font-script heading-lg" style={{ color: '#fff', textShadow: '0 0 30px rgba(255,255,255,0.2)', marginBottom: '1rem', fontSize: isMobile ? '3rem' : '4rem' }}>
+          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={textVariants} className="font-script heading-lg" style={{ color: 'var(--foreground)', marginBottom: '1rem', fontSize: isMobile ? '3rem' : '4rem' }}>
             A Journey Back Home
           </motion.h2>
           <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut" }} style={{ height: '2px', width: '80px', background: 'var(--primary)', margin: '0 auto', transformOrigin: 'center' }} />

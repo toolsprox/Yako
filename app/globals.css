@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;800&display=swap');
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #F3F4F6;
-  --primary: #CC0000;
-  --primary-hover: #A00000;
+  --background: #FFFDF5;
+  --foreground: #2A1810;
+  --primary: #E63900;
+  --primary-hover: #CC3300;
   
   --font-script: 'Caveat', cursive;
   --font-sans: 'Outfit', sans-serif;
@@ -51,19 +51,14 @@ body {
 .glass {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(40px); /* Heavy blur catches the background orbs */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+  backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Soft outer border */
-  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Specular highlight on top edge */
-  border-left: 1px solid rgba(255, 255, 255, 0.1); /* Specular highlight on left edge */
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 24px;
-  /* Outer shadow for depth, INSET white shadow for edge thickness/refraction */
   box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.6), 
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03), 
-    inset 0 2px 20px rgba(255, 255, 255, 0.08),
-    inset 0 -2px 20px rgba(0, 0, 0, 0.3);
+    0 30px 60px rgba(0, 0, 0, 0.08), 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 /* Glass Corner Reflection (Glare) */
@@ -71,47 +66,44 @@ body {
   content: "";
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  /* Diagonal light sheen radiating from top-left corner */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 35%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 40%);
   border-radius: inherit;
   pointer-events: none;
   z-index: 0;
 }
 
 .glass-nav {
-  background: rgba(10, 10, 10, 0.6);
+  background: rgba(255, 253, 245, 0.8);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .glass-input {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(0, 0, 0, 0.4); /* Inset shadow effect */
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: var(--foreground);
   border-radius: 12px;
   padding: 16px;
   outline: none;
   transition: all 0.3s;
-  box-shadow: inset 0 4px 10px rgba(0,0,0,0.4);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .glass-input:focus {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.15), inset 0 4px 10px rgba(0,0,0,0.4);
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 4px rgba(230, 57, 0, 0.15), inset 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .glass-icon {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
   padding: 12px;
   border-radius: 50%;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
 
 /* Buttons */
@@ -198,7 +190,7 @@ body {
 
 /* Animated Text Gradients */
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  background: linear-gradient(135deg, #2A1810 0%, #E63900 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -209,7 +201,7 @@ body {
 }
 
 .text-gradient-primary {
-  background: linear-gradient(135deg, #ff4d4d 0%, var(--primary) 50%, #800000 100%);
+  background: linear-gradient(135deg, #FF6B00 0%, #E63900 50%, #B32400 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -218,19 +210,19 @@ body {
 /* Cinematic Bento Box */
 .bento-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(30, 30, 30, 0.6) 0%, rgba(10, 10, 10, 0.8) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 20px;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 15px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .bento-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(204, 0, 0, 0.15), transparent 40%);
+  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 57, 0, 0.1), transparent 40%);
   opacity: 0;
   transition: opacity 0.5s;
   z-index: 0;
@@ -240,8 +232,8 @@ body {
 @media (hover: hover) {
   .bento-card:hover {
     transform: translateY(-8px) scale(1.02);
-    border-color: rgba(204, 0, 0, 0.3);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 30px 60px rgba(204, 0, 0, 0.15), 0 15px 35px rgba(0, 0, 0, 0.8);
+    border-color: rgba(230, 57, 0, 0.3);
+    box-shadow: 0 20px 50px rgba(230, 57, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.05);
   }
 
   .bento-card:hover::before {
@@ -252,6 +244,61 @@ body {
 .bento-content {
   position: relative;
   z-index: 1;
+}
+
+/* ==========================================================================
+   DARK THEME OVERRIDES (For Menu & Navbar)
+   ========================================================================== */
+.dark-theme {
+  --background: #0a0a0a;
+  --foreground: #F3F4F6;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.dark-theme .glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.03), inset 0 2px 20px rgba(255, 255, 255, 0.08), inset 0 -2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .glass::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 35%);
+}
+
+.dark-theme .glass-input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 4px 10px rgba(0,0,0,0.4);
+  color: var(--foreground);
+  color-scheme: dark;
+}
+
+.dark-theme .glass-icon {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.dark-theme .bento-card {
+  background: linear-gradient(180deg, rgba(30, 30, 30, 0.6) 0%, rgba(10, 10, 10, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+.dark-theme .bento-card::before {
+  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(204, 0, 0, 0.15), transparent 40%);
+}
+
+.dark-theme-nav {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Living Background Animations */

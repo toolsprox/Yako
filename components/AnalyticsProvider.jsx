@@ -89,6 +89,8 @@ function AnalyticsTracker() {
       let mappedEventType = 'page_view';
       if (pathname.includes('menu')) mappedEventType = 'menu_view';
       if (pathname.includes('gallery')) mappedEventType = 'gallery_view';
+      if (pathname.includes('locations')) mappedEventType = 'location_view';
+      if (pathname.includes('journal')) mappedEventType = 'article_view';
 
       // Get Geo data if it exists
       const city = localStorage.getItem('yako_geo_city') || '';

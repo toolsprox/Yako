@@ -49,7 +49,7 @@ export default function Navbar() {
       {/* Desktop Navigation (Unchanged) */}
       {!isMobile && (
         <nav 
-          className="glass-nav" 
+          className="dark-theme-nav" 
           style={{ 
             position: 'fixed', 
             top: '20px', 
