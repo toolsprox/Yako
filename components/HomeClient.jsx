@@ -23,20 +23,15 @@ const staggerContainer = {
 };
 
 export default function HomeClient({ menuItems, locationName }) {
-  const [showIntro, setShowIntro] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
     setHasMounted(true);
-    const hasSeenIntro = sessionStorage.getItem('yako_has_seen_intro_spilled');
-    if (!hasSeenIntro) {
-      setShowIntro(true);
-    }
   }, []);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
-    sessionStorage.setItem('yako_has_seen_intro_spilled', 'true');
   };
 
   return (
