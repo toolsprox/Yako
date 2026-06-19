@@ -4,9 +4,10 @@ import MenuShowcase from '@/components/MenuShowcase';
 import CultureShowcase from '@/components/CultureShowcase';
 import BookingSystem from '@/components/BookingSystem';
 import SriLankaMap from '@/components/SriLankaMap';
-import GreetingAnimation from '@/components/GreetingAnimation';
+import IntroSequence from '@/components/IntroSequence';
 import { MapPin, Clock, Phone } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,8 +23,35 @@ const staggerContainer = {
 };
 
 export default function HomeClient({ menuItems, locationName }) {
+  const [showIntro, setShowIntro] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+    const hasSeenIntro = sessionStorage.getItem('yako_has_seen_intro_spilled');
+    if (!hasSeenIntro) {
+      setShowIntro(true);
+    }
+  }, []);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    sessionStorage.setItem('yako_has_seen_intro_spilled', 'true');
+  };
+
   return (
-    <div style={{ paddingBottom: '100px', overflowX: 'hidden', position: 'relative' }}>
+    <>
+      <AnimatePresence>
+        {showIntro && <IntroSequence onComplete={handleIntroComplete} />}
+      </AnimatePresence>
+
+      <motion.div 
+        key={showIntro ? 'waiting' : 'ready'}
+        initial={hasMounted && showIntro ? { scale: 0.95, opacity: 0 } : { scale: 1, opacity: 1 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        style={{ paddingBottom: '100px', overflowX: 'hidden', position: 'relative' }}
+      >
       
       {/* Background Aurora / Gradient Orbs for Glassmorphism to blur */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -2, pointerEvents: 'none', overflow: 'hidden' }}>
@@ -69,7 +97,15 @@ export default function HomeClient({ menuItems, locationName }) {
 
         <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 2 }}>
           
-          <GreetingAnimation />
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}>
+             {/* Authentic Sri Lankan Greeting Fallback */}
+             <h2 style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--primary)', marginBottom: '0.5rem' }}>
+               ආයුබෝවන් <span style={{ color: 'var(--foreground)', opacity: 0.3, fontSize: '1.5rem', verticalAlign: 'middle', margin: '0 15px' }}>|</span> வணக்கம்
+             </h2>
+             <p style={{ fontSize: '0.9rem', letterSpacing: '5px', textTransform: 'uppercase', color: 'var(--foreground)', marginBottom: '3rem', opacity: 0.6 }}>
+               Ayubowan &bull; Vanakkam &bull; Welcome
+             </p>
+          </motion.div>
 
           <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: 0 }}>
             {locationName ? `Authentic Sri Lankan Restaurant near ${locationName} | Yako` : `Authentic Sri Lankan Restaurant in Pinner, London | Yako`}
@@ -187,6 +223,7 @@ export default function HomeClient({ menuItems, locationName }) {
       </section>
 
       </div> {/* END DARK THEME SECTION */}
-    </div>
+      </motion.div>
+    </>
   );
 }
