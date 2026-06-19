@@ -21,7 +21,7 @@ Creating the perfect hopper is an art form that requires immense patience and pr
 2. **Coconut Milk:** Providing the rich, creamy center.
 3. **Palm Toddy (or Yeast):** The crucial fermentation agent that gives the hopper its signature slight sourness and airy bubbles.
 
-The magic happens in the *thachchiya*, a small, deep, wok-like pan. The fermented batter is ladled in and swiftly swirled to coat the sides. The pan is then covered, trapping the steam. In just minutes, the result is a hopper with incredibly crispy, lattice-like edges and a soft, spongy center.
+The magic happens in the **thachchiya**, a small, deep, wok-like pan. The fermented batter is ladled in and swiftly swirled to coat the sides. The pan is then covered, trapping the steam. In just minutes, the result is a hopper with **incredibly crispy, lattice-like edges** and a soft, spongy center.
 
 ### Variations That Tell a Story
 
