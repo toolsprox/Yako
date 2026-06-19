@@ -40,7 +40,9 @@ export default function IntroSequence({ onComplete }) {
         pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        willChange: 'transform, opacity',
+        WebkitFontSmoothing: 'antialiased'
       }}
     >
       <style>
@@ -55,6 +57,8 @@ export default function IntroSequence({ onComplete }) {
             font-family: system-ui, -apple-system, sans-serif;
             font-weight: 300;
             white-space: nowrap;
+            will-change: stroke-dashoffset, stroke, fill, text-shadow;
+            transform: translateZ(0);
           }
           
           @keyframes draw-spilled {
@@ -87,7 +91,7 @@ export default function IntroSequence({ onComplete }) {
             position: 'absolute', 
             top: g.top, 
             left: g.left, 
-            transform: 'translate(-50%, -50%)',
+            transform: 'translate(-50%, -50%) translateZ(0)',
             overflow: 'visible',
             width: '1px', 
             height: '1px'

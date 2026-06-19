@@ -44,13 +44,10 @@ export default function HomeClient({ menuItems, locationName }) {
       
       {/* Background Aurora / Gradient Orbs for Glassmorphism to blur */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -2, pointerEvents: 'none', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(255, 100, 0, 0.15) 0%, transparent 70%)', filter: 'blur(60px)', animation: 'float1 20s infinite ease-in-out' }}></div>
-        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(255, 200, 0, 0.2) 0%, transparent 70%)', filter: 'blur(80px)', animation: 'float2 25s infinite ease-in-out' }}></div>
-        <div style={{ position: 'absolute', top: '40%', left: '30%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(0, 168, 107, 0.1) 0%, transparent 70%)', filter: 'blur(40px)', animation: 'float1 30s infinite ease-in-out reverse' }}></div>
+        <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(255, 100, 0, 0.15) 0%, transparent 70%)', filter: 'blur(60px)', animation: 'float1 20s infinite ease-in-out', willChange: 'transform' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(255, 200, 0, 0.2) 0%, transparent 70%)', filter: 'blur(80px)', animation: 'float2 25s infinite ease-in-out', willChange: 'transform' }}></div>
+        <div style={{ position: 'absolute', top: '40%', left: '30%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(0, 168, 107, 0.1) 0%, transparent 70%)', filter: 'blur(40px)', animation: 'float1 30s infinite ease-in-out reverse', willChange: 'transform' }}></div>
       </div>
-
-      {/* Subtle Noise Texture overlay to make it feel premium */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: -1, pointerEvents: 'none', backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.03%22/%3E%3C/svg%3E")' }}></div>
 
       {/* Hero Section */}
       <section style={{ 
