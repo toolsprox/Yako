@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Home, UtensilsCrossed, Image as ImageIcon, CalendarHeart } from 'lucide-react';
+import { Home, UtensilsCrossed, Image as ImageIcon, CalendarHeart, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Navbar() {
@@ -41,6 +41,7 @@ export default function Navbar() {
     { name: 'Home', path: '/', icon: Home },
     { name: 'Menu', path: '/#menu', icon: UtensilsCrossed },
     { name: 'Gallery', path: '/gallery', icon: ImageIcon },
+    { name: 'Journal', path: '/journal', icon: BookOpen },
     { name: 'Book', path: '/book', icon: CalendarHeart } // Dedicated booking page for mobile
   ];
 
