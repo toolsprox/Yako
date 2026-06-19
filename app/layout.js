@@ -5,7 +5,6 @@ import AnalyticsProvider from '@/components/AnalyticsProvider';
 import DynamicTracker from '@/components/DynamicTracker';
 import DynamicPromotions from '@/components/promotions/DynamicPromotions';
 import SmoothScroll from '@/components/SmoothScroll';
-import Preloader from '@/components/Preloader';
 
 export const metadata = {
   metadataBase: new URL('https://www.yakolondon.com'),
@@ -67,7 +66,6 @@ export default function RootLayout({ children }) {
       <head>
       </head>
       <body>
-        <Preloader />
         <AnalyticsProvider>
           <DynamicTracker />
           <DynamicPromotions />

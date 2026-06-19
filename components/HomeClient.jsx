@@ -4,6 +4,7 @@ import MenuShowcase from '@/components/MenuShowcase';
 import CultureShowcase from '@/components/CultureShowcase';
 import BookingSystem from '@/components/BookingSystem';
 import SriLankaMap from '@/components/SriLankaMap';
+import GreetingAnimation from '@/components/GreetingAnimation';
 import { MapPin, Clock, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -68,15 +69,7 @@ export default function HomeClient({ menuItems, locationName }) {
 
         <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 2 }}>
           
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}>
-             {/* Authentic Sri Lankan Greeting */}
-             <h2 style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-               ආයුබෝවන් <span style={{ color: 'var(--foreground)', opacity: 0.3, fontSize: '1.5rem', verticalAlign: 'middle', margin: '0 15px' }}>|</span> வணக்கம்
-             </h2>
-             <p style={{ fontSize: '0.9rem', letterSpacing: '5px', textTransform: 'uppercase', color: 'var(--foreground)', marginBottom: '3rem', opacity: 0.6 }}>
-               Ayubowan &bull; Vanakkam &bull; Welcome
-             </p>
-          </motion.div>
+          <GreetingAnimation />
 
           <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: 0 }}>
             {locationName ? `Authentic Sri Lankan Restaurant near ${locationName} | Yako` : `Authentic Sri Lankan Restaurant in Pinner, London | Yako`}
